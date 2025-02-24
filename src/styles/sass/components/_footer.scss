@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 3rem;
+
+  background-color: var(--color-grey-100);
+
+  color: var(--color-white);
+
+  & .developer {
+    & a {
+      text-decoration: none;
+      transition: color 0.3s ease;
+      opacity: 0.9;
+      &:link,
+      &:visited {
+        color: var(--color-white);
+      }
+    }
+
+    & a:hover {
+      color: var(--color-grey-20);
+    }
+  }
+}

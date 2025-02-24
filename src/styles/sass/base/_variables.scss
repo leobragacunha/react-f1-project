@@ -1,0 +1,23 @@
+:root {
+  // Colors
+  --color-black: #000;
+  --color-white: rgb(255, 255, 255);
+  --color-white-80: rgba(255, 255, 255, 0.8);
+
+  // Grey scale
+  --color-grey-20: #999;
+  --color-grey-40: #777;
+  --color-grey-60: #555;
+  --color-grey-80: #333;
+  --color-grey-100: #111;
+
+  // Box-shadow
+  --std-box-shadow: 0.2rem 1rem 1rem var(--color-grey-60);
+
+  // Dimensions
+  --navbar-height: 5rem;
+  --footer-height: 3rem;
+  --remaining-height: calc(
+    100vh - (var(--navbar-height) + var(--footer-height))
+  );
+}

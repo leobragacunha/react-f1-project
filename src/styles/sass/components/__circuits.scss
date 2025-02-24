@@ -1,0 +1,101 @@
+// Circuits
+.circuits-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  width: 85vw;
+  margin: 2rem auto;
+
+  & li {
+    flex: 0 1 30%;
+    list-style-type: none;
+  }
+}
+
+// Circuits Cards
+.circuit-card {
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    grid-template-rows: 50% repeat(4, 1fr);
+    // gap: 1rem;
+
+    // border: 1px solid var(--color-grey-60);
+    border-radius: 0.5rem;
+    height: 45vh;
+    box-shadow: var(--std-box-shadow);
+
+    & p {
+      padding: 0 1rem;
+      font-size: 1.8rem;
+    }
+  }
+
+  &__image {
+    grid-column: 1/3;
+    grid-row: 1/1;
+    justify-self: center;
+    align-self: center;
+    padding: 1rem;
+    height: 100%;
+  }
+
+  &__name {
+    &.card-label {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+
+    &.card-value {
+      grid-column: 1/2;
+      grid-row: 3/4;
+    }
+  }
+
+  &__created-at {
+    &.card-label {
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+
+    &.card-value {
+      grid-column: 2/3;
+      grid-row: 3/4;
+    }
+  }
+
+  &__location {
+    &.card-label {
+      grid-column: 1/2;
+      grid-row: 4/5;
+    }
+
+    &.card-value {
+      grid-column: 1/2;
+      grid-row: 5/6;
+    }
+  }
+
+  &__capacity {
+    &.card-label {
+      grid-column: 2/3;
+      grid-row: 4/5;
+    }
+
+    &.card-value {
+      grid-column: 2/3;
+      grid-row: 5/6;
+    }
+  }
+}
+
+.card-label {
+  @extend .poppins-medium;
+  align-self: end;
+}
+
+.card-value {
+  align-self: start;
+}

@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import Home from "./features/home/Home";
+import Circuits from "./features/circuits/Circuits";
+import CircuitCard from "./features/circuits/CircuitCard";
+import Teams from "./features/teams/Teams";
+import Pilots from "./features/pilots/Pilots";
+import StandardLayout from "./layouts/StandardLayout";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const queryClient = new QueryClient();
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
 
-export default App
+        <Routes>
+          <Route element={<StandardLayout />}>
+            <Route index path="/" element={<Home />} />
+            <Route path="circuits" element={<Circuits />}>
+              <Route path=":circuit" element={<CircuitCard />} />
+            </Route>
+            <Route path="teams" element={<Teams />} />
+            <Route path="pilots" element={<Pilots />} />
+          </Route>
+        </Routes>
+        {/* <button onClick={() => getCircuits()}>TESTAR</button> */}
+      </QueryClientProvider>
+    </>
+  );
+}
+export default App;

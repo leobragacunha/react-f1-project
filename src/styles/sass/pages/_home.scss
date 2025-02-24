@@ -1,0 +1,30 @@
+.home {
+  position: relative;
+
+  &__container {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    padding: 5rem;
+
+    width: 70%;
+    border-radius: 0.5rem;
+    background-color: var(--color-white-80);
+    font-size: 1.8rem;
+
+    & h1 {
+      font-size: 2.5rem;
+      margin-left: 3rem;
+    }
+  }
+}
+
+.std-layout {
+  display: flex;
+  flex-direction: column;
+}

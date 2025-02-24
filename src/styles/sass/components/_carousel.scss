@@ -1,0 +1,57 @@
+.carousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: var(--remaining-height);
+}
+
+.carousel-track {
+  display: flex;
+  width: calc(
+    100vw * 6
+  ); /* O dobro do tamanho original para permitir o looping */
+  animation: scroll 20s linear infinite;
+}
+
+.carousel-img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin white-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.slide {
+  &::before,
+  &::after {
+    @include white-gradient;
+    content: "";
+    height: var(--remaining-height);
+    position: absolute;
+    width: 4rem;
+    margin: 0 -2rem;
+    z-index: 2;
+  }
+
+  &::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100vw * 3));
+  }
+}

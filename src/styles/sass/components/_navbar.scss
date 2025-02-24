@@ -1,0 +1,60 @@
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+
+  height: var(--navbar-height);
+  width: 100%;
+
+  color: var(--color-white);
+  background-image: linear-gradient(
+    to right,
+    var(--color-grey-80),
+    var(--color-grey-40)
+  );
+
+  & li {
+    list-style-type: none;
+  }
+
+  &__navitem {
+    display: flex;
+    align-items: center;
+
+    font-size: 2rem;
+    padding: 2rem;
+    height: 100%;
+
+    transition: background-color 0.3s ease, color 0.3s ease;
+    opacity: 0.9;
+
+    &:link,
+    &:visited {
+      color: var(--color-white);
+      text-decoration: none;
+    }
+
+    &:hover,
+    &-active {
+      color: var(--color-grey-80);
+      background-color: var(--color-white);
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+
+    & img {
+      max-height: 60%;
+      width: auto;
+      object-fit: contain;
+
+      margin: auto 3rem;
+    }
+  }
+}
+
+.navbar__navitem.active {
+  color: var(--color-grey-80);
+  background-color: var(--color-white);
+}
