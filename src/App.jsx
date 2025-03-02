@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import Home from "./features/home/Home";
 import Circuits from "./features/circuits/Circuits";
-import CircuitCard from "./features/circuits/CircuitCard";
+import CircuitDetail from "./features/circuits/CircuitDetail";
 import Teams from "./features/teams/Teams";
 import Pilots from "./features/pilots/Pilots";
 import StandardLayout from "./layouts/StandardLayout";
@@ -20,9 +20,9 @@ function App() {
         <Routes>
           <Route element={<StandardLayout />}>
             <Route index path="/" element={<Home />} />
-            <Route path="circuits" element={<Circuits />}>
-              <Route path=":circuit" element={<CircuitCard />} />
-            </Route>
+            <Route path="circuits" element={<Circuits />} />
+            <Route path="circuits/:circuitId" element={<CircuitDetail />} />
+
             <Route path="teams" element={<Teams />} />
             <Route path="pilots" element={<Pilots />} />
           </Route>

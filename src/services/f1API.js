@@ -1,13 +1,16 @@
-import { apiKey } from "../utils/constants";
+import { apiKey, BASE_URL } from "../utils/constants";
 
-export async function getCircuits() {
-  const res = await fetch("https://v1.formula-1.api-sports.io/circuits", {
-    method: "GET",
-    headers: {
-      "x-apisports-key": "https://v1.formula-1.api-sports.io/",
-      "x-rapidapi-key": apiKey,
-    },
-  });
+export async function getCircuits({ circuitId = "" }) {
+  const res = await fetch(
+    `${BASE_URL}/circuits${circuitId ? `?id=${circuitId}` : ""}`,
+    {
+      method: "GET",
+      headers: {
+        "x-apisports-key": `${BASE_URL}/`,
+        "x-rapidapi-key": apiKey,
+      },
+    }
+  );
   const data = await res.json();
 
   const { errors, response: circuits } = data;
@@ -17,4 +20,18 @@ export async function getCircuits() {
   // console.log(data);
 
   return circuits;
+}
+
+export async function getTeams() {
+  const res = await fetch(`${BASE_URL}/teams`, {
+    method: "GET",
+    headers: {
+      "x-apisports-key": `${BASE_URL}/`,
+      "x-rapidapi-key": apiKey,
+    },
+  });
+
+  const data = await res.json();
+
+  console.log(data);
 }
