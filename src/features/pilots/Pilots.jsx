@@ -1,5 +1,16 @@
+import IntroImage from "../../ui/IntroImage";
+
 function Pilots() {
-  return <div>PILOTS COMPONENT</div>;
+  return (
+    <>
+      <IntroImage
+        pageTitle="Pilots"
+        imgPath="pilots_info.jpg"
+        imgAltText="F1 Pilots"
+        classes="pilots-cover"
+      />
+    </>
+  );
 }
 
 export default Pilots;

@@ -12,10 +12,33 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: "Poppins";
-  font-weight: 300;
-  font-style: normal;
-  color: var(--color-grey-100);
+  color: var(--color-grey-80);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+.text-large {
+  font-size: 3.5rem;
+}
+.text-medium {
+  font-size: 2.5rem;
+}
+.text-small {
+  font-size: 1.8rem;
+}
+.text-primary {
+  color: var(--color-grey-80);
+}
+.text-secondary {
+  font-style: italic;
+  color: var(--color-grey-60);
 }
 
 .poppins-thin {
@@ -30,13 +53,13 @@ body {
   font-style: normal;
 }
 
-.poppins-light {
+.poppins-light, body {
   font-family: "Poppins", serif;
   font-weight: 300;
   font-style: normal;
 }
 
-.poppins-regular {
+.poppins-regular, .text-title {
   font-family: "Poppins", serif;
   font-weight: 400;
   font-style: normal;
@@ -249,7 +272,7 @@ body {
 }
 .circuits-grid {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 3rem;
   width: 85vw;
@@ -321,6 +344,24 @@ body {
   align-self: start;
 }
 
+.circuit__detail__container {
+  display: flex;
+  gap: 15%;
+  padding: 5% 10%;
+  height: var(--remaining-height);
+}
+.circuit__detail__section-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: start;
+}
+.circuit__detail__section-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .footer {
   display: flex;
   justify-content: center;
@@ -353,8 +394,16 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right 90%;
   border-radius: inherit;
+}
+.intro-image img.circuits-cover {
+  object-position: right 90%;
+}
+.intro-image img.teams-cover {
+  object-position: center 20%;
+}
+.intro-image img.pilots-cover {
+  object-position: center 30%;
 }
 
 .page-title {
