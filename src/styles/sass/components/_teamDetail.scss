@@ -1,0 +1,62 @@
+// Flex Positioning
+.flex {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--remaining-height);
+  }
+
+  &-row {
+    display: flex;
+    gap: 2rem;
+    margin: auto;
+    padding: 5rem 0;
+    width: 85vw;
+
+    &-2 {
+      padding-left: 3rem;
+      flex: 1;
+    }
+  }
+}
+
+.team {
+  &__session {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__header {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5rem;
+
+    & .flex-column {
+      flex: 1;
+    }
+  }
+
+  &__logo {
+    flex: 0 0 30%;
+    align-self: center;
+  }
+
+  &__general-info {
+    flex: 1;
+  }
+
+  &__technical-info {
+    flex: 1;
+  }
+  &__race-records {
+    flex: 1;
+  }
+}

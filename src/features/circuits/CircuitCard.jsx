@@ -19,9 +19,9 @@ function CircuitCard({ circuit }) {
   //   },
 
   return (
-    <div className="circuit-card__container">
+    <div className="circuit-card card__container">
       <img
-        className="circuit-card__image"
+        className="circuit-card card__image"
         src={circuit.image}
         alt={circuit.name}
       />

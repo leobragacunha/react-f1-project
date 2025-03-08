@@ -15,15 +15,16 @@ export async function getCircuits({ circuitId = "" }) {
 
   const { errors, response: circuits } = data;
 
-  if (errors.length > 0) throw new Error(`Couldn't fetch data ${errors}`);
+  if (errors.length > 0)
+    throw new Error(`Couldn't fetch circuits from the API ${errors}`);
 
   // console.log(data);
 
   return circuits;
 }
 
-export async function getTeams() {
-  const res = await fetch(`${BASE_URL}/teams`, {
+export async function getTeams({ teamId = "" }) {
+  const res = await fetch(`${BASE_URL}/teams${teamId ? `?id=${teamId}` : ""}`, {
     method: "GET",
     headers: {
       "x-apisports-key": `${BASE_URL}/`,
@@ -33,5 +34,12 @@ export async function getTeams() {
 
   const data = await res.json();
 
-  console.log(data);
+  const { errors, response: teams } = data;
+
+  if (errors.length > 0)
+    throw new Error(`Couldn't fetch teams from the API (${errors})`);
+
+  // console.log(teams);
+
+  return teams;
 }

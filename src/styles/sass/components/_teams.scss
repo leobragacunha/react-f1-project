@@ -1,10 +1,8 @@
 // Check cards for more CSS info
 
-// Circuits Cards
-.circuit-card {
-  & .card__container {
-    // display: grid;
-    // grid-template-columns: 1fr 0.5fr;
+// Teams Cards
+.team-card {
+  &.card__container {
     grid-template-rows: 50% repeat(4, 1fr);
   }
 
@@ -20,7 +18,7 @@
     }
   }
 
-  &__created-at {
+  &__created-in {
     &.card-label {
       grid-column: 2/3;
       grid-row: 2/3;
@@ -32,27 +30,19 @@
     }
   }
 
-  &__location {
+  &__championship {
     &.card-label {
-      grid-column: 1/2;
+      grid-column: 1/-1;
       grid-row: 4/5;
     }
 
     &.card-value {
-      grid-column: 1/2;
+      grid-column: 1/-1;
       grid-row: 5/6;
-    }
-  }
 
-  &__capacity {
-    &.card-label {
-      grid-column: 2/3;
-      grid-row: 4/5;
-    }
-
-    &.card-value {
-      grid-column: 2/3;
-      grid-row: 5/6;
+      // Flex is only to move the number of trophies to the left
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

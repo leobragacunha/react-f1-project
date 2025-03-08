@@ -90,7 +90,7 @@ function Circuits() {
         imgAltText="Las Vegas Circuit"
         classes="circuits-cover"
       />
-      <ul className="circuits-grid">
+      <ul className="card-grid">
         {circuits.map((circuit) => (
           <li
             key={circuit.id}

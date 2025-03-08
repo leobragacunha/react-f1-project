@@ -1,17 +1,541 @@
-/* Error: no such file or directory
- *   ,
- * 7 | @import "components/_circuits";
- *   |         ^^^^^^^^^^^^^^^^^^^^^^
- *   '
- *   src\styles\sass\main.scss 7:9  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: 'Error: no such file or directory\a   \2577 \a 7 \2502  @import "components/_circuits";\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   src\\styles\\sass\\main.scss 7:9  root stylesheet';
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  color: var(--color-grey-80);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+.react-icons {
+  height: inherit;
+  width: 3rem;
+  vertical-align: middle;
+}
+
+.text-large {
+  font-size: 3.5rem;
+}
+.text-medium {
+  font-size: 2.5rem;
+}
+.text-small {
+  font-size: 1.8rem;
+}
+.text-primary {
+  color: var(--color-grey-80);
+}
+.text-secondary {
+  font-style: italic;
+  color: var(--color-grey-60);
+}
+
+.poppins-thin {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light, body, .text-content {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular, .text-title {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium, .card-label {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+:root {
+  --color-black: #000;
+  --color-white: rgb(255, 255, 255);
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-grey-20: #999;
+  --color-grey-40: #777;
+  --color-grey-60: #555;
+  --color-grey-80: #333;
+  --color-grey-100: #111;
+  --std-box-shadow: 0.2rem 1rem 1rem var(--color-grey-60);
+  --navbar-height: 5rem;
+  --footer-height: 3rem;
+  --remaining-height: calc(
+    100vh - (var(--navbar-height) + var(--footer-height))
+  );
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  height: var(--navbar-height);
+  width: 100%;
+  color: var(--color-white);
+  background-image: linear-gradient(to right, var(--color-grey-80), var(--color-grey-40));
+}
+.navbar li {
+  list-style-type: none;
+}
+.navbar__navitem {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  padding: 2rem;
+  height: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  opacity: 0.9;
+}
+.navbar__navitem:link, .navbar__navitem:visited {
+  color: var(--color-white);
+  text-decoration: none;
+}
+.navbar__navitem:hover, .navbar__navitem-active {
+  color: var(--color-grey-80);
+  background-color: var(--color-white);
+}
+.navbar__logo {
+  display: flex;
+  align-items: center;
+}
+.navbar__logo img {
+  max-height: 60%;
+  width: auto;
+  object-fit: contain;
+  margin: auto 3rem;
+}
+
+.navbar__navitem.active {
+  color: var(--color-grey-80);
+  background-color: var(--color-white);
+}
+
+.button {
+  padding: 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  min-width: 15rem;
+}
+
+.primary {
+  font-size: 2.4rem;
+  color: var(--color-white);
+  background-color: var(--color-grey-80);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.primary:hover {
+  background-color: var(--color-white-80);
+  color: var(--color-grey-80);
+}
+
+.card-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3rem;
+  width: 85vw;
+  margin: 2rem auto;
+}
+.card-grid li {
+  flex: 0 1 30%;
+  list-style-type: none;
+}
+.card__container {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  border-radius: 0.5rem;
+  height: 45vh;
+  box-shadow: var(--std-box-shadow);
+}
+.card__container p {
+  padding: 0 1rem;
+  font-size: 1.8rem;
+}
+.card__image {
+  grid-column: 1/-1;
+  grid-row: 1/1;
+  justify-self: center;
+  align-self: center;
+  padding: 1rem;
+  max-width: 100%;
+  height: 100%;
+}
+.card-label {
+  align-self: end;
+}
+.card-value {
+  align-self: start;
+}
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: var(--remaining-height);
+}
+
+.carousel-track {
+  display: flex;
+  width: 600vw; /* O dobro do tamanho original para permitir o looping */
+  animation: scroll 20s linear infinite;
+}
+
+.carousel-img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide::before, .slide::after {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+  content: "";
+  height: var(--remaining-height);
+  position: absolute;
+  width: 4rem;
+  margin: 0 -2rem;
+  z-index: 2;
+}
+.slide::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-300vw);
+  }
+}
+.circuit-card .card__container {
+  grid-template-rows: 50% repeat(4, 1fr);
+}
+.circuit-card__name.card-label {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.circuit-card__name.card-value {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+.circuit-card__created-at.card-label {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+.circuit-card__created-at.card-value {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+.circuit-card__location.card-label {
+  grid-column: 1/2;
+  grid-row: 4/5;
+}
+.circuit-card__location.card-value {
+  grid-column: 1/2;
+  grid-row: 5/6;
+}
+.circuit-card__capacity.card-label {
+  grid-column: 2/3;
+  grid-row: 4/5;
+}
+.circuit-card__capacity.card-value {
+  grid-column: 2/3;
+  grid-row: 5/6;
+}
+
+.circuit__detail__container {
+  display: flex;
+  gap: 15%;
+  padding: 5% 10%;
+  height: var(--remaining-height);
+}
+.circuit__detail__section-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: start;
+}
+.circuit__detail__section-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  background-color: var(--color-grey-100);
+  color: var(--color-white);
+}
+.footer .developer a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+  opacity: 0.9;
+}
+.footer .developer a:link, .footer .developer a:visited {
+  color: var(--color-white);
+}
+.footer .developer a:hover {
+  color: var(--color-grey-20);
+}
+
+.intro-image {
+  position: relative;
+  margin: 2rem auto;
+  width: 85vw;
+  height: 30vh;
+  border-radius: 0.5rem;
+  box-shadow: var(--std-box-shadow);
+}
+.intro-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.intro-image img.circuits-cover {
+  object-position: right 90%;
+}
+.intro-image img.teams-cover {
+  object-position: center 20%;
+}
+.intro-image img.pilots-cover {
+  object-position: center 30%;
+}
+
+.page-title {
+  border-left: 0.8rem solid var(--color-grey-80);
+  font-size: 2.5rem;
+  padding: 1rem;
+  position: absolute;
+  top: 12%;
+  left: 2%;
+  background-color: var(--color-white-80);
+  border-radius: 0.5rem;
+}
+
+.main-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: auto;
+}
+
+.team-card.card__container {
+  grid-template-rows: 50% repeat(4, 1fr);
+}
+.team-card__name.card-label {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.team-card__name.card-value {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+.team-card__created-in.card-label {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+.team-card__created-in.card-value {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+.team-card__championship.card-label {
+  grid-column: 1/-1;
+  grid-row: 4/5;
+}
+.team-card__championship.card-value {
+  grid-column: 1/-1;
+  grid-row: 5/6;
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: var(--remaining-height);
+}
+.flex-row {
+  display: flex;
+  gap: 2rem;
+  margin: auto;
+  padding: 5rem 0;
+  width: 85vw;
+}
+.flex-row-2 {
+  padding-left: 3rem;
+  flex: 1;
+}
+
+.team__session {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.team__header {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+.team__content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5rem;
+}
+.team__content .flex-column {
+  flex: 1;
+}
+.team__logo {
+  flex: 0 0 30%;
+  align-self: center;
+}
+.team__general-info {
+  flex: 1;
+}
+.team__technical-info {
+  flex: 1;
+}
+.team__race-records {
+  flex: 1;
+}
+
+.home {
+  position: relative;
+}
+.home__container {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 5rem;
+  width: 70%;
+  border-radius: 0.5rem;
+  background-color: var(--color-white-80);
+  font-size: 1.8rem;
+}
+.home__container h1 {
+  font-size: 2.5rem;
+  margin-left: 3rem;
+}
+
+.std-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=main.css.map */
