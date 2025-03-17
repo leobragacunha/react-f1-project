@@ -43,3 +43,47 @@ export async function getTeams({ teamId = "" }) {
 
   return teams;
 }
+
+// There is no endpoint directly to drivers (to get all drivers info)
+export async function getPilotsPerSeason(seasonYear) {
+  const res = await fetch(`${BASE_URL}/rankings/drivers?season=${seasonYear}`, {
+    method: "GET",
+    headers: {
+      "x-apisports-key": `${BASE_URL}/`,
+      "x-rapidapi-key": apiKey,
+    },
+  });
+
+  const data = await res.json();
+
+  const { errors, response: drivers } = data;
+
+  if (errors.length > 0)
+    throw new Error(`Couldn't fetch drivers from the API (${errors})`);
+
+  // console.log(drivers);
+
+  return drivers;
+}
+
+export async function getPilot({ id, name, searchString }) {
+  const res = await fetch(`${BASE_URL}/drivers?id=${id}`, {
+    method: "GET",
+    headers: {
+      "x-apisports-key": `${BASE_URL}/`,
+      "x-rapidapi-key": apiKey,
+    },
+  });
+
+  const data = await res.json();
+
+  const { errors, response } = data;
+  const pilot = response[0];
+
+  if (errors.length > 0)
+    throw new Error(`Couldn't fetch driver from the API (${errors})`);
+
+  // console.log(pilot);
+
+  return pilot;
+}

@@ -19,12 +19,12 @@
     grid-template-columns: 1fr 0.5fr;
     // rows configuration will be set on each component card config (circuits, teams or pilots).
 
+    padding: 0 1rem;
     border-radius: 0.5rem;
     height: 45vh;
     box-shadow: var(--std-box-shadow);
 
     & p {
-      padding: 0 1rem;
       font-size: 1.8rem;
     }
   }
@@ -37,6 +37,10 @@
     padding: 1rem;
     max-width: 100%;
     height: 100%;
+
+    &-small {
+      max-height: 4rem;
+    }
   }
 
   &-label {

@@ -2,43 +2,46 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { getTeams } from "../../services/f1API";
 import { IconContext } from "react-icons";
-import { FaFolder } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { PiTimerFill } from "react-icons/pi";
 
+import { returnPositionComplement } from "../../utils/helpers";
+
 function TeamDetail() {
+  // Team Schema
+  // const fakeData = [
+  //   {
+  //     base: "Maranello, Italy",
+  //     chassis: "SF-24",
+  //     director: "Frédéric Vasseur",
+  //     engine: "Ferrari",
+  //     fastest_laps: 263,
+  //     first_team_entry: 1950,
+  //     highest_race_finish: { position: 1, number: 249 },
+  //     id: 3,
+  //     logo: "https://media.api-sports.io/formula-1/teams/3.png",
+  //     name: "Scuderia Ferrari",
+  //     pole_positions: 253,
+  //     president: "John Elkann",
+  //     technical_manager: "Loic Serra / Enrico Gualtieri",
+  //     tyres: "Pirelli",
+  //     world_championships: 16,
+  //   },
+  // ];
+
   const { teamId } = useParams();
 
-  // const {
-  //   data: team,
-  //   isPending,
-  //   isError,
-  //   error,
-  // } = useQuery({ queryKey: ["team"], queryFn: () => getTeams({ teamId }) });
+  const {
+    data: team,
+    isPending,
+    isError,
+    error,
+  } = useQuery({ queryKey: ["team"], queryFn: () => getTeams({ teamId }) });
 
-  // if (isPending) return <div>Fetching Data</div>;
-  // if (isError) return <div>Couldnt fetch data</div>;
+  console.log(team);
 
-  // Team Schema
-  const fakeData = [
-    {
-      base: "Maranello, Italy",
-      chassis: "SF-24",
-      director: "Frédéric Vasseur",
-      engine: "Ferrari",
-      fastest_laps: 263,
-      first_team_entry: 1950,
-      highest_race_finish: { position: 1, number: 249 },
-      id: 3,
-      logo: "https://media.api-sports.io/formula-1/teams/3.png",
-      name: "Scuderia Ferrari",
-      pole_positions: 253,
-      president: "John Elkann",
-      technical_manager: "Loic Serra / Enrico Gualtieri",
-      tyres: "Pirelli",
-      world_championships: 16,
-    },
-  ];
+  if (isPending) return <div>Fetching Data</div>;
+  if (isError) return <div>Couldnt fetch data</div>;
 
   const {
     id,
@@ -56,23 +59,10 @@ function TeamDetail() {
     technical_manager: techManager,
     tyres,
     world_championships: numWorldChampionships,
-  } = fakeData[0];
+  } = team[0];
 
-  let bestPositionComplement;
-
-  switch (bestPosition) {
-    case 1:
-      bestPositionComplement = "st";
-      break;
-    case 2:
-      bestPositionComplement = "nd";
-      break;
-    case 3:
-      bestPositionComplement = "rd";
-      break;
-    default:
-      bestPositionComplement = "th";
-  }
+  const { ordinal: bestPositionComplement } =
+    returnPositionComplement(bestPosition);
 
   return (
     <>

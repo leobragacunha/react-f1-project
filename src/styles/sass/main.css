@@ -249,12 +249,12 @@ h6 {
 .card__container {
   display: grid;
   grid-template-columns: 1fr 0.5fr;
+  padding: 0 1rem;
   border-radius: 0.5rem;
   height: 45vh;
   box-shadow: var(--std-box-shadow);
 }
 .card__container p {
-  padding: 0 1rem;
   font-size: 1.8rem;
 }
 .card__image {
@@ -265,6 +265,9 @@ h6 {
   padding: 1rem;
   max-width: 100%;
   height: 100%;
+}
+.card__image-small {
+  max-height: 4rem;
 }
 .card-label {
   align-self: end;
@@ -430,6 +433,40 @@ h6 {
   justify-content: center;
   gap: 0.8rem;
   margin: auto;
+}
+
+.pilot-form {
+  margin: 1rem auto;
+  width: 85vw;
+}
+.pilot-form__label {
+  padding-right: 1rem;
+}
+.pilot-form__select {
+  background-color: var(--color-white);
+  border: none;
+  color: var(--colorgrey-80);
+}
+.pilot-card.card__container {
+  grid-template-rows: 50% repeat(2);
+  grid-template-columns: 1fr 0.7fr;
+}
+.pilot-card__name {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.pilot-card__team {
+  grid-column: 1/2;
+  grid-row: 3/4;
+  display: flex;
+}
+.pilot-card__position-label {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+.pilot-card__position-info {
+  grid-column: 2/3;
+  grid-row: 3/4;
 }
 
 .team-card.card__container {

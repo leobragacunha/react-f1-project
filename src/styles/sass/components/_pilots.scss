@@ -1,0 +1,46 @@
+.pilot {
+  &-form {
+    margin: 1rem auto;
+    width: 85vw;
+
+    &__label {
+      padding-right: 1rem;
+    }
+
+    &__select {
+      background-color: var(--color-white);
+      border: none;
+      color: var(--colorgrey-80);
+    }
+  }
+
+  &-card {
+    &.card__container {
+      grid-template-rows: 50% repeat(2);
+      grid-template-columns: 1fr 0.7fr;
+    }
+
+    &__name {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+
+    &__team {
+      grid-column: 1/2;
+      grid-row: 3/4;
+      display: flex;
+    }
+
+    &__position {
+      &-label {
+        grid-column: 2/3;
+        grid-row: 2/3;
+      }
+
+      &-info {
+        grid-column: 2/3;
+        grid-row: 3/4;
+      }
+    }
+  }
+}
