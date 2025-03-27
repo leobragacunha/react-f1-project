@@ -45,7 +45,7 @@ function PilotCard({ pilot }) {
         <p className="card-value">{teamName}</p>
       </div>
       <p className="pilot-card__position-label card-label">
-        Position in {season}
+        Position ({season})
       </p>
       <p className="pilot-card__position-info card-value">
         {emoji} {position}

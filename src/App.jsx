@@ -10,6 +10,7 @@ import Teams from "./features/teams/Teams";
 import TeamDetail from "./features/teams/TeamDetail";
 import Pilots from "./features/pilots/Pilots";
 import { useState } from "react";
+import PilotDetail from "./features/pilots/PilotDetail";
 
 function App() {
   const queryClient = new QueryClient();
@@ -31,17 +32,8 @@ function App() {
             <Route path="teams" element={<Teams />} />
             <Route path="teams/:teamId" element={<TeamDetail />} />
 
-            <Route
-              path="pilots"
-              element={
-                <Pilots
-                // seasonYear={seasonYear}
-                // onYearChange={setSeasonYear}
-                // searchParams={searchParams}
-                // setSearchParams={setSearchParams}
-                />
-              }
-            />
+            <Route path="pilots" element={<Pilots />} />
+            <Route path="pilots/:pilotId" element={<PilotDetail />} />
           </Route>
         </Routes>
       </QueryClientProvider>

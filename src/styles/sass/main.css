@@ -449,7 +449,7 @@ h6 {
 }
 .pilot-card.card__container {
   grid-template-rows: 50% repeat(2);
-  grid-template-columns: 1fr 0.7fr;
+  grid-template-columns: 1fr 0.6fr;
 }
 .pilot-card__name {
   grid-column: 1/2;
@@ -467,6 +467,60 @@ h6 {
 .pilot-card__position-info {
   grid-column: 2/3;
   grid-row: 3/4;
+}
+
+.pilot__container {
+  display: flex;
+  flex-direction: column;
+  height: var(--remaining-height);
+}
+.pilot__session {
+  display: flex;
+  width: 85vw;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  gap: 4vw;
+  flex: 1;
+}
+.pilot__image {
+  flex: 0 0 18%;
+}
+.pilot__image img {
+  width: 100%;
+}
+.pilot__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.pilot__info-country p {
+  justify-self: start;
+  display: inline-block;
+  margin-left: 1rem;
+}
+.pilot__info-birthplace {
+  padding-bottom: 1rem;
+}
+
+.team__session {
+  margin: 0 auto;
+  width: 85vw;
+}
+.team__session ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5rem;
+  list-style-type: none;
+  overflow-x: scroll;
+}
+.team__session-info {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+.team__session-logo {
+  height: 15rem;
+  max-width: 20vw;
 }
 
 .team-card.card__container {

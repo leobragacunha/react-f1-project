@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { getPilot, getPilotsPerSeason } from "../../services/f1API";
 import IntroImage from "../../ui/IntroImage";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import PilotCard from "./PilotCard";
 
 function Pilots() {
   const [seasonYear, setSeasonYear] = useState(2023);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const navigate = useNavigate();
 
   // Creating effect to get the default seasonYear value on the first page mount
   useEffect(function () {
@@ -21,76 +23,79 @@ function Pilots() {
     setSearchParams({ season: e.target.value });
   }
 
-  // const {
-  //   data: pilots,
-  //   isPending,
-  //   isError,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ["drivers", seasonYear],
-  //   queryFn: () => getPilotsPerSeason(seasonYear),
-  // });
+  const {
+    data: pilots,
+    isPending,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["drivers", seasonYear],
+    queryFn: () => getPilotsPerSeason(seasonYear),
+  });
+
+  if (isPending) return <div>Loading Data...</div>;
+  if (isError) return <div>Error fetching Data </div>;
 
   // ENDPOINT: /rankings/drivers
-  const fakeData = [
-    {
-      behind: null,
-      driver: {
-        abbr: "VER",
-        id: 25,
-        image: "https://media.api-sports.io/formula-1/drivers/25.png",
-        name: "Max Verstappen",
-        number: 1,
-      },
-      points: 575,
-      position: 1,
-      season: 2023,
-      team: {
-        id: 1,
-        logo: "https://media.api-sports.io/formula-1/teams/1.png",
-        name: "Red Bull Racing",
-      },
-      wins: 19,
-    },
-    {
-      behind: null,
-      driver: {
-        abbr: "VER",
-        id: 26,
-        image: "https://media.api-sports.io/formula-1/drivers/25.png",
-        name: "Max Verstappen",
-        number: 1,
-      },
-      points: 575,
-      position: 1,
-      season: 2023,
-      team: {
-        id: 1,
-        logo: "https://media.api-sports.io/formula-1/teams/1.png",
-        name: "Red Bull Racing",
-      },
-      wins: 19,
-    },
-    {
-      behind: null,
-      driver: {
-        abbr: "VER",
-        id: 27,
-        image: "https://media.api-sports.io/formula-1/drivers/25.png",
-        name: "Max Verstappen",
-        number: 1,
-      },
-      points: 575,
-      position: 1,
-      season: 2023,
-      team: {
-        id: 1,
-        logo: "https://media.api-sports.io/formula-1/teams/1.png",
-        name: "Red Bull Racing",
-      },
-      wins: 19,
-    },
-  ];
+  // const fakeData = [
+  //   {
+  //     behind: null,
+  //     driver: {
+  //       abbr: "VER",
+  //       id: 25,
+  //       image: "https://media.api-sports.io/formula-1/drivers/25.png",
+  //       name: "Max Verstappen",
+  //       number: 1,
+  //     },
+  //     points: 575,
+  //     position: 1,
+  //     season: 2023,
+  //     team: {
+  //       id: 1,
+  //       logo: "https://media.api-sports.io/formula-1/teams/1.png",
+  //       name: "Red Bull Racing",
+  //     },
+  //     wins: 19,
+  //   },
+  //   {
+  //     behind: null,
+  //     driver: {
+  //       abbr: "VER",
+  //       id: 26,
+  //       image: "https://media.api-sports.io/formula-1/drivers/25.png",
+  //       name: "Max Verstappen",
+  //       number: 1,
+  //     },
+  //     points: 575,
+  //     position: 1,
+  //     season: 2023,
+  //     team: {
+  //       id: 1,
+  //       logo: "https://media.api-sports.io/formula-1/teams/1.png",
+  //       name: "Red Bull Racing",
+  //     },
+  //     wins: 19,
+  //   },
+  //   {
+  //     behind: null,
+  //     driver: {
+  //       abbr: "VER",
+  //       id: 27,
+  //       image: "https://media.api-sports.io/formula-1/drivers/25.png",
+  //       name: "Max Verstappen",
+  //       number: 1,
+  //     },
+  //     points: 575,
+  //     position: 1,
+  //     season: 2023,
+  //     team: {
+  //       id: 1,
+  //       logo: "https://media.api-sports.io/formula-1/teams/1.png",
+  //       name: "Red Bull Racing",
+  //     },
+  //     wins: 19,
+  //   },
+  // ];
 
   // ENDPOINT: /drivers?id=20
   // const fakeData2 = [
@@ -132,9 +137,6 @@ function Pilots() {
   //   },
   // ];
 
-  // if (isLoading) return <div>Loading data...</div>;
-  // if (isError) return <div>Error fetching data...</div>;
-
   return (
     <>
       <IntroImage
@@ -166,8 +168,11 @@ function Pilots() {
       </form>
 
       <ul className="card-grid">
-        {fakeData.map((pilot) => (
-          <li key={pilot.driver.id}>
+        {pilots.map((pilot) => (
+          <li
+            key={pilot.driver.id}
+            onClick={() => navigate(`/pilots/${pilot.driver.id}`)}
+          >
             <PilotCard pilot={pilot} />
           </li>
         ))}

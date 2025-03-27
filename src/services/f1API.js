@@ -61,12 +61,12 @@ export async function getPilotsPerSeason(seasonYear) {
   if (errors.length > 0)
     throw new Error(`Couldn't fetch drivers from the API (${errors})`);
 
-  // console.log(drivers);
+  console.log(drivers);
 
   return drivers;
 }
 
-export async function getPilot({ id, name, searchString }) {
+export async function getPilot(id) {
   const res = await fetch(`${BASE_URL}/drivers?id=${id}`, {
     method: "GET",
     headers: {
@@ -83,7 +83,7 @@ export async function getPilot({ id, name, searchString }) {
   if (errors.length > 0)
     throw new Error(`Couldn't fetch driver from the API (${errors})`);
 
-  // console.log(pilot);
+  console.log(pilot);
 
   return pilot;
 }
