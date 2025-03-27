@@ -1,4 +1,5 @@
 function TeamCard({ team }) {
+  // Data Example
   // base: "Maranello, Italy",
   //   chassis: "SF-24",
   //   director: "Frédéric Vasseur",

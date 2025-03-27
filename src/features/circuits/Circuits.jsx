@@ -3,6 +3,7 @@ import { getCircuits } from "../../services/f1API";
 import { useNavigate } from "react-router";
 import CircuitCard from "./CircuitCard";
 import IntroImage from "../../ui/IntroImage";
+import Spinner from "../../ui/Spinner";
 
 // FAKE DATA (only for testing purposes)
 // const fakeData = [
@@ -79,7 +80,7 @@ function Circuits() {
     queryFn: getCircuits,
   });
 
-  if (isPending) return <div>Loading Data...</div>;
+  if (isPending) return <Spinner />;
   if (isError) return <div>Error loading data {error}</div>;
 
   return (

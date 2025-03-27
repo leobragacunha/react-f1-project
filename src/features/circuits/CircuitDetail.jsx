@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { getCircuits } from "../../services/f1API";
 import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../ui/Spinner";
 
 function CircuitDetail() {
   const { circuitId } = useParams();
@@ -17,7 +18,7 @@ function CircuitDetail() {
 
   // console.log(circuit);
 
-  if (isPending) return <div>Loading Data</div>;
+  if (isPending) return <Spinner />;
   if (isError) return <div>Error Loading Data {error}</div>;
 
   const {

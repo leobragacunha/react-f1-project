@@ -6,6 +6,7 @@ import { FaGear } from "react-icons/fa6";
 import { PiTimerFill } from "react-icons/pi";
 
 import { returnPositionComplement } from "../../utils/helpers";
+import Spinner from "../../ui/Spinner";
 
 function TeamDetail() {
   // Team Schema
@@ -40,7 +41,7 @@ function TeamDetail() {
 
   console.log(team);
 
-  if (isPending) return <div>Fetching Data</div>;
+  if (isPending) return <Spinner />;
   if (isError) return <div>Couldnt fetch data</div>;
 
   const {

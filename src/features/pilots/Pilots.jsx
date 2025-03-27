@@ -4,6 +4,7 @@ import IntroImage from "../../ui/IntroImage";
 import { useNavigate, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import PilotCard from "./PilotCard";
+import Spinner from "../../ui/Spinner";
 
 function Pilots() {
   const [seasonYear, setSeasonYear] = useState(2023);
@@ -33,7 +34,7 @@ function Pilots() {
     queryFn: () => getPilotsPerSeason(seasonYear),
   });
 
-  if (isPending) return <div>Loading Data...</div>;
+  if (isPending) return <Spinner />;
   if (isError) return <div>Error fetching Data </div>;
 
   // ENDPOINT: /rankings/drivers

@@ -3,6 +3,7 @@ import { getTeams } from "../../services/f1API";
 import IntroImage from "../../ui/IntroImage";
 import TeamCard from "./TeamCard";
 import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../ui/Spinner";
 
 function Teams() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Teams() {
     queryFn: getTeams,
   });
 
-  if (isPending) return <div>Loading Teams</div>;
+  if (isPending) return <Spinner />;
   if (isError) return <div>Error fetching data ({error})</div>;
 
   // const fakeData = [

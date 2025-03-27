@@ -1,6 +1,7 @@
 import { returnPositionComplement } from "../../utils/helpers";
 
 function PilotCard({ pilot }) {
+  // Data Example
   // {
   //   behind: null,
   //   driver: {

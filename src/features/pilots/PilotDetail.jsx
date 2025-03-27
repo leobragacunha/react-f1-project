@@ -6,6 +6,7 @@ import {
   returnPositionComplement,
 } from "../../utils/helpers";
 import PilotTeamRecord from "./PilotTeamRecord";
+import Spinner from "../../ui/Spinner";
 
 function PilotDetail() {
   const { pilotId } = useParams();
@@ -17,7 +18,7 @@ function PilotDetail() {
     error,
   } = useQuery({ queryKey: [pilotId], queryFn: () => getPilot(pilotId) });
 
-  if (isPending) return <div>Loading data...</div>;
+  if (isPending) return <Spinner />;
   if (isError) return <div>Couldn't fetch data</div>;
 
   // const fakeData2 = {
