@@ -16,4 +16,9 @@
     background-color: var(--color-white-80);
     color: var(--color-grey-80);
   }
+
+  @include respond(large2-5) {
+    font-size: 1.6rem;
+    min-width: 7rem;
+  }
 }

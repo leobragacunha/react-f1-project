@@ -11,6 +11,7 @@ import TeamDetail from "./features/teams/TeamDetail";
 import Pilots from "./features/pilots/Pilots";
 import { useState } from "react";
 import PilotDetail from "./features/pilots/PilotDetail";
+import NotFound from "./ui/NotFound";
 
 function App() {
   const queryClient = new QueryClient();
@@ -34,6 +35,8 @@ function App() {
 
             <Route path="pilots" element={<Pilots />} />
             <Route path="pilots/:pilotId" element={<PilotDetail />} />
+
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </QueryClientProvider>

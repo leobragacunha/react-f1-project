@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import CircuitCard from "./CircuitCard";
 import IntroImage from "../../ui/IntroImage";
 import Spinner from "../../ui/Spinner";
+import ApiLimits from "../../ui/ApiLimits";
 
 // FAKE DATA (only for testing purposes)
 // const fakeData = [
@@ -70,15 +71,12 @@ import Spinner from "../../ui/Spinner";
 function Circuits() {
   const navigate = useNavigate();
 
-  const {
-    data: circuits,
-    error,
-    isPending,
-    isError,
-  } = useQuery({
+  const { data, error, isPending, isError } = useQuery({
     queryKey: ["circuits"],
     queryFn: getCircuits,
   });
+
+  const { circuits = [], errors = {} } = data || {};
 
   if (isPending) return <Spinner />;
   if (isError) return <div>Error loading data {error}</div>;
@@ -91,16 +89,20 @@ function Circuits() {
         imgAltText="Las Vegas Circuit"
         classes="circuits-cover"
       />
-      <ul className="card-grid">
-        {circuits.map((circuit) => (
-          <li
-            key={circuit.id}
-            onClick={() => navigate(`/circuits/${circuit.id}`)}
-          >
-            <CircuitCard circuit={circuit} />
-          </li>
-        ))}
-      </ul>
+      {errors?.requests ? (
+        <ApiLimits feature="circuits" />
+      ) : (
+        <ul className="card-grid">
+          {circuits?.map((circuit) => (
+            <li
+              key={circuit.id}
+              onClick={() => navigate(`/circuits/${circuit.id}`)}
+            >
+              <CircuitCard circuit={circuit} />
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

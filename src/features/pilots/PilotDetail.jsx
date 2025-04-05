@@ -9,18 +9,7 @@ import PilotTeamRecord from "./PilotTeamRecord";
 import Spinner from "../../ui/Spinner";
 
 function PilotDetail() {
-  const { pilotId } = useParams();
-
-  const {
-    data: pilot,
-    isPending,
-    isError,
-    error,
-  } = useQuery({ queryKey: [pilotId], queryFn: () => getPilot(pilotId) });
-
-  if (isPending) return <Spinner />;
-  if (isError) return <div>Couldn't fetch data</div>;
-
+  // DATA EXAMPLE
   // const fakeData2 = {
   //   abbr: "HAM",
   //   birthdate: "1985-01-07",
@@ -122,6 +111,20 @@ function PilotDetail() {
   //   world_championships: 7,
   // };
 
+  const { pilotId } = useParams();
+
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: [pilotId],
+    queryFn: () => getPilot({ id: pilotId }),
+  });
+
+  console.log(data);
+
+  const { pilot = [], errors = {} } = data || {};
+
+  if (isPending) return <Spinner />;
+  if (isError) return <div>Couldn't fetch data</div>;
+
   const {
     id,
     name,
@@ -135,13 +138,13 @@ function PilotDetail() {
     highest_race_finish: highestRacePosition,
     podiums,
     image,
-  } = pilot;
+  } = pilot[0];
 
   const bestPositionComplement = returnPositionComplement(
     highestRacePosition.position
   );
 
-  const { teams } = pilot;
+  const { teams } = pilot[0];
   const teamsCleaned = checkTeamSequence(teams);
 
   // console.log(teamsCleaned);
@@ -155,7 +158,7 @@ function PilotDetail() {
         <div className="pilot__info">
           <div className="pilot__info-header">
             <h1 className="pilot__info-name text-title text-large">
-              <span>#{pilotNumber} </span>
+              <span>#{pilotNumber || ""} </span>
               {name}
             </h1>
             <div className="pilot__info-country">
@@ -167,31 +170,42 @@ function PilotDetail() {
                 alt={`${country.name}`}
               ></img>
               <p className="pilot__info-birthplace text-medium text-secondary">
-                {birthplace}
+                {birthplace || country.name}
               </p>
             </div>
           </div>
           <p className="pilot__info-birthdate text-medium text-title">
-            Born in: <span className="text-content">{birthdate}</span>
+            Born in:{" "}
+            <span className="text-content">{birthdate || "Unkwown"}</span>
           </p>
           <p className="pilot__info-championships text-medium text-title">
             World Championships:{" "}
             <span className="text-content">{worldChampionships || 0}</span>
           </p>
           <p className="pilot__info-career-pts text-medium text-title">
-            Career Points: <span className="text-content">{careerPts}</span>
+            Career Points:{" "}
+            <span className="text-content">{careerPts || "Unkwown"}</span>
           </p>
           <p className="pilot__info-num-races text-medium text-title">
-            Number of races: <span className="text-content">{numRaces}</span>
-            <span className="text-content"> ({podiums} podiums)</span>
+            Number of races:{" "}
+            <span className="text-content">{numRaces || "Unkwown"}</span>
+            {podiums && (
+              <span className="text-content"> ({podiums} podiums)</span>
+            )}
           </p>
           <p className="pilot__info-race-position text-medium text-title">
             Best race position:{" "}
-            <span className="text-content">{`${highestRacePosition.position}${bestPositionComplement.ordinal}`}</span>
             <span className="text-content">
-              {" "}
-              ({highestRacePosition.number}x)
+              {highestRacePosition.position
+                ? `${highestRacePosition.position}${bestPositionComplement.ordinal}`
+                : "Unkwown"}
             </span>
+            {highestRacePosition.number && (
+              <span className="text-content">
+                {" "}
+                ({highestRacePosition.number}x)
+              </span>
+            )}
           </p>
         </div>
       </div>

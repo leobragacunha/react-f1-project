@@ -1,5 +1,7 @@
 .pilot {
   &-form {
+    display: flex;
+    justify-content: space-between;
     margin: 1rem auto;
     width: 85vw;
 
@@ -12,12 +14,23 @@
       border: none;
       color: var(--colorgrey-80);
     }
+
+    @include respond(large1) {
+      flex-direction: column;
+    }
+
+    @include respond(large2) {
+      flex-direction: column;
+    }
   }
 
   &-card {
+    position: relative;
+    padding: 2rem;
+
     &.card__container {
-      grid-template-rows: 50% repeat(2);
-      grid-template-columns: 1fr 0.6fr;
+      grid-template-rows: 70% repeat(2, 1fr);
+      grid-template-columns: 1fr;
     }
 
     &__name {
@@ -32,13 +45,8 @@
     }
 
     &__position {
-      &-label {
-        grid-column: 2/3;
-        grid-row: 2/3;
-      }
-
       &-info {
-        grid-column: 2/3;
+        grid-column: 1/2;
         grid-row: 3/4;
       }
     }

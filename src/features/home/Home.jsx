@@ -1,11 +1,25 @@
+import { useState } from "react";
 import Carousel from "./Carousel";
 import MainMenu from "./MainMenu";
 
 function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  function handleModal() {
+    setIsModalOpen((modal) => !modal);
+    const element = document.elem;
+    console.log(element);
+  }
+
   return (
     <div className="home">
       <Carousel />
-      <div className="home__container">
+      <button className={`home__modal__toggle`} onClick={handleModal}>
+        {isModalOpen ? "×" : "≡"}
+      </button>
+      <div
+        className={`home__container home__modal ${!isModalOpen && "hidden"}`}
+      >
         <div className="home__container-text">
           <h1 className="poppins-medium-italic">React F1 Project</h1>
           <p>

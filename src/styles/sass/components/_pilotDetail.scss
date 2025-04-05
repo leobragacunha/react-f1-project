@@ -4,6 +4,10 @@
     flex-direction: column;
     // justify-content: space-around;
     height: var(--remaining-height);
+
+    @include respond(large3) {
+      height: auto;
+    }
   }
 
   &__session {
@@ -14,6 +18,11 @@
     gap: 4vw;
 
     flex: 1;
+
+    @include respond(large3) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &__image {
@@ -21,6 +30,11 @@
 
     & img {
       width: 100%;
+
+      @include respond(large3) {
+        height: 30vh;
+        width: auto;
+      }
     }
   }
 

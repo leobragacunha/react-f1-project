@@ -1,7 +1,8 @@
 import { returnPositionComplement } from "../../utils/helpers";
 
-function PilotCard({ pilot }) {
+function PilotCard({ pilot, isSearch = false }) {
   // Data Example
+  // !isSearch
   // {
   //   behind: null,
   //   driver: {
@@ -20,38 +21,111 @@ function PilotCard({ pilot }) {
   //     name: "Red Bull Racing",
   //   },
 
-  const {
-    driver: { abbr: nameShort, id, image: photo, name: pilotName, number },
+  // isSearch
+  //  {
+  //   abbr: "MSC",
+  // birthdate: "1969-03-01",
+  // birthplace: null,
+  // career_points: "1566",
+  // country:{name: 'Germany', code: 'DE'},
+  // grands_prix_entered: null,
+  // highest_grid_position: null,
+  // highest_race_finish: {position: null, number: null},
+  // id:46,
+  // image:"https://media.api-sports.io/formula-1/drivers/46.png",
+  // name: "Michael Schumacher",
+  // nationality: "German",
+  // number: 7,
+  // podiums: 155,
+  // teams: (2) [{…}, {…}],
+  // world_championships: 7,}
+
+  // if (isSearch) {
+  //   const {
+  //     id,
+  //     name: pilotName,
+  //     number,
+  //     image: photo,
+  //     teams: [
+  //       {
+  //         team: { logo: teamLogo },
+  //       },
+  //     ],
+  //   } = pilot;
+  // } else {
+  //   const {
+  //     driver: { abbr: nameShort, id, image: photo, name: pilotName, number },
+  //     points,
+  //     position,
+  //     season,
+  //     team: { id: teamId, logo: teamLogo, name: teamName },
+  //   } = pilot;
+  // }
+
+  // Declaring variables outside scope due to "conditional destructuring"
+  let position,
     points,
-    position,
     season,
-    team: { id: teamId, logo: teamLogo, name: teamName },
-  } = pilot;
+    teamName,
+    pilotName,
+    photo,
+    number,
+    teamLogo,
+    id;
 
-  const { ordinal: bestPositionComplement } =
-    returnPositionComplement(position);
+  if (isSearch) {
+    ({
+      id,
+      name: pilotName,
+      number,
+      image: photo,
+      teams: [
+        {
+          team: { logo: teamLogo },
+        },
+      ],
+    } = pilot);
+  } else {
+    ({
+      driver: { id, image: photo, name: pilotName, number },
+      points,
+      position,
+      season,
+      team: { logo: teamLogo, name: teamName },
+    } = pilot);
+  }
 
-  const { emoji } = returnPositionComplement(position);
+  const { ordinal: bestPositionComplement } = position
+    ? returnPositionComplement(position)
+    : { ordinal: "" };
+
+  const { emoji } = position
+    ? returnPositionComplement(position)
+    : { emoji: "" };
 
   return (
-    <div className="pilot-card card__container">
+    <div className={`pilot-card card__container`}>
       <img className="card__image" src={photo} alt={`Photo of ${pilotName}`} />
-      <p className="pilot-card__name card-label">{pilotName}</p>
-      <div className="pilot-card__team">
-        <img
-          className="card__image-small"
-          src={teamLogo}
-          alt={`Logo of ${teamName}`}
-        />
-        <p className="card-value">{teamName}</p>
-      </div>
-      <p className="pilot-card__position-label card-label">
-        Position ({season})
+      <p className="pilot-card__name card-label">
+        {pilotName} {emoji}
       </p>
-      <p className="pilot-card__position-info card-value">
-        {emoji} {position}
-        {`${bestPositionComplement}`} ({`${points} pts`})
-      </p>
+      <img
+        className="card__image-small"
+        src={teamLogo}
+        alt={`Logo of ${teamName}`}
+      />
+
+      {!isSearch && (
+        <>
+          <p className="pilot-card__position-info card-label">
+            Position in {season}:{" "}
+            <span className="card-value text-content">
+              {position}
+              {`${bestPositionComplement}`} ({`${points} pts`})
+            </span>
+          </p>
+        </>
+      )}
     </div>
   );
 }

@@ -1,0 +1,32 @@
+// BREAKPOINTS
+$large1: 1240px;
+$large2: 980px;
+$large2-5: 700px;
+$large3: 580px;
+
+// MQ MANAGER
+@mixin respond($breakpoint) {
+  @if $breakpoint == large1 {
+    @media only screen and (max-width: $large1) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == large2 {
+    @media only screen and (max-width: $large2) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == large2-5 {
+    @media only screen and (max-width: $large2-5) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == large3 {
+    @media only screen and (max-width: $large3) {
+      @content;
+    }
+  }
+}

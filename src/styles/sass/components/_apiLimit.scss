@@ -1,0 +1,20 @@
+.api-limit {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // 30vh: height of IntroImage;
+    // 4rem: 2rem for each vertical margin;
+    height: calc(var(--remaining-height) - 30vh - 4rem);
+    width: 85vw;
+    margin: auto;
+  }
+
+  &-icons {
+    height: auto;
+    width: 10vw;
+
+    color: var(--color-grey-80);
+  }
+}

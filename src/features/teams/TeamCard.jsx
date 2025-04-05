@@ -38,7 +38,7 @@ function TeamCard({ team }) {
           ? `${
               team.world_championships < 13
                 ? "🏆".repeat(team.world_championships)
-                : "🏆".repeat(12) + "..."
+                : "🏆".repeat(10) + "+++"
             }`
           : "None"}
         {team.world_championships > 0 && (

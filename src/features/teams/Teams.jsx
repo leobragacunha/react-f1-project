@@ -4,19 +4,17 @@ import IntroImage from "../../ui/IntroImage";
 import TeamCard from "./TeamCard";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../ui/Spinner";
+import ApiLimits from "../../ui/ApiLimits";
 
 function Teams() {
   const navigate = useNavigate();
 
-  const {
-    data: teams,
-    isPending,
-    isError,
-    error,
-  } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ["teams"],
     queryFn: getTeams,
   });
+
+  const { teams = [], errors = {} } = data || {};
 
   if (isPending) return <Spinner />;
   if (isError) return <div>Error fetching data ({error})</div>;
@@ -83,14 +81,17 @@ function Teams() {
         imgAltText="Main teams presidents"
         classes="teams-cover"
       />
-
-      <ul className="card-grid">
-        {teams.map((team) => (
-          <li key={team.id} onClick={() => navigate(`/teams/${team.id}`)}>
-            <TeamCard team={team} />
-          </li>
-        ))}
-      </ul>
+      {errors?.requests ? (
+        <ApiLimits feature="teams" />
+      ) : (
+        <ul className="card-grid">
+          {teams.map((team) => (
+            <li key={team.id} onClick={() => navigate(`/teams/${team.id}`)}>
+              <TeamCard team={team} />
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

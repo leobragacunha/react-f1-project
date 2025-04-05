@@ -5,6 +5,36 @@
     gap: 15%;
     padding: 5% 10%;
     height: var(--remaining-height);
+
+    @include respond(large2-5) {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 2fr 1fr;
+
+      gap: 10%;
+
+      height: auto;
+    }
+  }
+
+  &__photo {
+    @include respond(large2-5) {
+      grid-row: 1/2;
+      text-align: center;
+    }
+
+    & img {
+      @include respond(large2-5) {
+        width: 70%;
+      }
+    }
+  }
+
+  &__hof {
+    @include respond(large2-5) {
+      grid-row: 3/4;
+      justify-self: center;
+    }
   }
 
   &__section {
@@ -12,12 +42,21 @@
       display: flex;
       flex-direction: column;
       gap: 4rem;
-      align-items: start;
+      align-items: center;
+
+      @include respond(large2-5) {
+        display: contents;
+      }
     }
     &-2 {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      @include respond(large2-5) {
+        display: grid;
+        grid-row: 2/3;
+      }
     }
   }
 }

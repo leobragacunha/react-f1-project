@@ -32,17 +32,17 @@ function TeamDetail() {
 
   const { teamId } = useParams();
 
-  const {
-    data: team,
-    isPending,
-    isError,
-    error,
-  } = useQuery({ queryKey: ["team"], queryFn: () => getTeams({ teamId }) });
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: ["team"],
+    queryFn: () => getTeams({ teamId }),
+  });
 
-  console.log(team);
+  const { teams = [], errors = {} } = data || {};
 
   if (isPending) return <Spinner />;
   if (isError) return <div>Couldnt fetch data</div>;
+
+  console.log(teams);
 
   const {
     id,
@@ -60,7 +60,7 @@ function TeamDetail() {
     technical_manager: techManager,
     tyres,
     world_championships: numWorldChampionships,
-  } = team[0];
+  } = teams[0];
 
   const { ordinal: bestPositionComplement } =
     returnPositionComplement(bestPosition);
@@ -84,13 +84,13 @@ function TeamDetail() {
                 <p className="text-title text-small text-primary">
                   Created in:{" "}
                   <span className="text-content text-secondary">
-                    {createdIn}
+                    {createdIn || "Unknown"}
                   </span>
                 </p>
                 <p className="text-title text-small text-primary">
                   Location:{" "}
                   <span className="text-content text-secondary">
-                    {location}
+                    {location || "Unknown"}
                   </span>
                 </p>
               </div>
@@ -99,13 +99,13 @@ function TeamDetail() {
                 <p className="text-title text-small text-primary">
                   President:{" "}
                   <span className="text-content text-secondary">
-                    {president}
+                    {president || "Unknown"}
                   </span>
                 </p>
                 <p className="text-title text-small text-primary">
                   Director:{" "}
                   <span className="text-content text-secondary">
-                    {director}
+                    {director || "Unknown"}
                   </span>
                 </p>
               </div>
@@ -126,20 +126,26 @@ function TeamDetail() {
             <p className="text-title text-small text-primary">
               Techinal Manager:{" "}
               <span className="text-content text-secondary ">
-                {techManager}
+                {techManager || "Unknown"}
               </span>
             </p>
             <p className="text-title text-small text-primary">
               Engine:{" "}
-              <span className="text-content text-secondary ">{engine}</span>
+              <span className="text-content text-secondary ">
+                {engine || "Unknown"}
+              </span>
             </p>
             <p className="text-title text-small text-primary">
               Chassis:{" "}
-              <span className="text-content text-secondary ">{chassis}</span>
+              <span className="text-content text-secondary ">
+                {chassis || "Unknown"}
+              </span>
             </p>
             <p className="text-title text-small text-primary">
               Tyres:{" "}
-              <span className="text-content text-secondary ">{tyres}</span>
+              <span className="text-content text-secondary ">
+                {tyres || "Unknown"}
+              </span>
             </p>
           </div>
 
@@ -156,23 +162,29 @@ function TeamDetail() {
             <p className="text-title text-small text-primary">
               World Championships:{" "}
               <span className="text-content text-secondary ">
-                {numWorldChampionships}
+                {numWorldChampionships ?? "Unknown"}
               </span>
             </p>
             <p className="text-title text-small text-primary">
               Best Race Position:{" "}
-              <span className="text-content text-secondary ">
-                {`${bestPosition}${bestPositionComplement} (${numBestPosition}x)`}
-              </span>
+              {bestPosition ? (
+                <span className="text-content text-secondary ">
+                  {`${bestPosition}${bestPositionComplement} (${numBestPosition}x)`}
+                </span>
+              ) : (
+                <span className="text-content text-secondary ">Unknown</span>
+              )}
             </p>
             <p className="text-title text-small text-primary">
               Pole Positions:{" "}
-              <span className="text-content text-secondary ">{numPoles}</span>
+              <span className="text-content text-secondary ">
+                {numPoles || "Unknown"}
+              </span>
             </p>
             <p className="text-title text-small text-primary">
               Fastest Laps:{" "}
               <span className="text-content text-secondary ">
-                {numFastestLaps}
+                {numFastestLaps || "Unknown"}
               </span>
             </p>
           </div>

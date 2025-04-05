@@ -18,9 +18,9 @@ export async function getCircuits({ circuitId = "" }) {
   if (errors.length > 0)
     throw new Error(`Couldn't fetch circuits from the API ${errors}`);
 
-  // console.log(data);
+  // console.log(circuits, errors);
 
-  return circuits;
+  return { circuits, errors };
 }
 
 export async function getTeams({ teamId = "" }) {
@@ -41,7 +41,7 @@ export async function getTeams({ teamId = "" }) {
 
   // console.log(teams);
 
-  return teams;
+  return { errors, teams };
 }
 
 // There is no endpoint directly to drivers (to get all drivers info)
@@ -56,18 +56,23 @@ export async function getPilotsPerSeason(seasonYear) {
 
   const data = await res.json();
 
-  const { errors, response: drivers } = data;
+  const { errors, response: pilotsSeason } = data;
 
   if (errors.length > 0)
     throw new Error(`Couldn't fetch drivers from the API (${errors})`);
 
-  console.log(drivers);
+  console.log(pilotsSeason);
 
-  return drivers;
+  return { errors, pilotsSeason };
 }
 
-export async function getPilot(id) {
-  const res = await fetch(`${BASE_URL}/drivers?id=${id}`, {
+export async function getPilot({ id, name, searchQuery }) {
+  let endpointURL = `${BASE_URL}/drivers`;
+  if (id) endpointURL += `?id=${id}`;
+  if (name) endpointURL += `?name=${name}`;
+  if (searchQuery) endpointURL += `?search=${searchQuery}`;
+
+  const res = await fetch(`${endpointURL}`, {
     method: "GET",
     headers: {
       "x-apisports-key": `${BASE_URL}/`,
@@ -78,12 +83,10 @@ export async function getPilot(id) {
   const data = await res.json();
 
   const { errors, response } = data;
-  const pilot = response[0];
+  const pilot = response;
 
   if (errors.length > 0)
     throw new Error(`Couldn't fetch driver from the API (${errors})`);
 
-  console.log(pilot);
-
-  return pilot;
+  return { errors, pilot };
 }

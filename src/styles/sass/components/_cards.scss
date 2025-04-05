@@ -1,7 +1,7 @@
 .card {
   &-grid {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 3rem;
 
@@ -11,6 +11,14 @@
     & li {
       flex: 0 1 30%;
       list-style-type: none;
+
+      @include respond(large1) {
+        flex: 0 0 40%;
+      }
+
+      @include respond(large2) {
+        flex: 0 0 80%;
+      }
     }
   }
 
@@ -21,12 +29,16 @@
 
     padding: 0 1rem;
     border-radius: 0.5rem;
-    height: 45vh;
+    height: 55vh;
     box-shadow: var(--std-box-shadow);
 
     & p {
       font-size: 1.8rem;
     }
+
+    // @include respond(large2) {
+    //   height: 30vh;
+    // }
   }
 
   &__image {
@@ -39,6 +51,9 @@
     height: 100%;
 
     &-small {
+      position: absolute;
+      top: 50%;
+      left: 3%;
       max-height: 4rem;
     }
   }

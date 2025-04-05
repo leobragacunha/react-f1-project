@@ -11,12 +11,21 @@
     100vw * 6
   ); /* O dobro do tamanho original para permitir o looping */
   animation: scroll 20s linear infinite;
+
+  @include respond(large2) {
+    animation: none;
+    flex-direction: column;
+  }
 }
 
 .carousel-img {
   width: 100vw;
   height: 100%;
   object-fit: cover;
+
+  @include respond(large2) {
+    height: 33vh;
+  }
 }
 
 @mixin white-gradient {
@@ -26,6 +35,10 @@
     rgba(255, 255, 255, 0.3) 50%,
     rgba(255, 255, 255, 0) 100%
   );
+
+  @include respond(large2) {
+    background: none;
+  }
 }
 
 .slide {

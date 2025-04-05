@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { getCircuits } from "../../services/f1API";
+import { getCircuits, getPilot } from "../../services/f1API";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../ui/Spinner";
 
@@ -7,19 +7,33 @@ function CircuitDetail() {
   const { circuitId } = useParams();
 
   const {
-    data: circuit,
+    data: circuitData,
     isPending,
     isError,
     error,
   } = useQuery({
-    queryKey: ["circuit"],
+    queryKey: ["circuit", circuitId],
     queryFn: () => getCircuits({ circuitId }),
   });
 
-  // console.log(circuit);
+  const { circuits = [], errors = {} } = circuitData || {};
+  const circuit = circuits[0] || {};
+  const recordDriver = circuit?.lap_record?.driver;
+
+  // Getting pilot record image:
+  const {
+    data: dataImage,
+    isPending: isPendingImage,
+    isError: isErrorImage,
+    error: errorImage,
+  } = useQuery({
+    queryKey: ["driverImage", recordDriver],
+    queryFn: () => getPilot({ name: recordDriver }),
+    enabled: !!recordDriver,
+  });
 
   if (isPending) return <Spinner />;
-  if (isError) return <div>Error Loading Data {error}</div>;
+  if (isError) return <div>Error Loading Data {error.message}</div>;
 
   const {
     id,
@@ -30,14 +44,19 @@ function CircuitDetail() {
     },
     first_grand_prix,
     image,
-    lap_record: { driver: recordDriver, time: recordTime, year: recordYear },
+    lap_record: { time: recordTime, year: recordYear },
     laps,
     name: circuitName,
     opened,
     race_distance,
-  } = circuit[0];
+  } = circuit;
 
   // console.log(id);
+
+  const { pilot = [] } = dataImage || [];
+  const recordDriverImage = pilot[0]?.image;
+
+  // console.log(pilot);
 
   return (
     <div className="circuit__detail__container">
@@ -47,6 +66,9 @@ function CircuitDetail() {
         </div>
         <div className="circuit__detail__hof">
           <h2 className="text-primary text-medium">Track Record</h2>
+          {recordDriverImage && (
+            <img src={recordDriverImage} alt={`Photo of ${recordDriver}`} />
+          )}
           <p className="text-primary text-small">{recordDriver}</p>
           <p className="text-secondary text-small">
             🗓️ {recordYear} ⏱️ {recordTime}
@@ -69,19 +91,19 @@ function CircuitDetail() {
           </p>
         </div>
         <div className="circuit__detail__text-container">
-          <p className="text-primary- text-medium">
+          <p className="text-primary text-medium">
             <span className="text-title">First Grand Prix:</span>{" "}
             {first_grand_prix}
           </p>
         </div>
         <div className="circuit__detail__text-container">
-          <p className="text-primary- text-medium">
+          <p className="text-primary text-medium">
             <span className="text-title">Capacity:</span> {capacity}
           </p>
         </div>
         <div className="circuit__detail__text-container">
           {laps && (
-            <p className="text-primary- text-medium">
+            <p className="text-primary text-medium">
               <span className="text-title">Laps: </span>
               {laps}
             </p>
@@ -89,7 +111,7 @@ function CircuitDetail() {
         </div>
         <div className="circuit__detail__text-container">
           {race_distance && (
-            <p className="text-primary- text-medium">
+            <p className="text-primary text-medium">
               <span className="text-title">Race Distance:</span> {race_distance}
             </p>
           )}

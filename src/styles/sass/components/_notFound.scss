@@ -1,0 +1,12 @@
+.not-found__container {
+  height: var(--remaining-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  & p {
+    display: inline-block;
+    text-align: center;
+  }
+}
